@@ -87,6 +87,7 @@ function onButton1Click(){
 }
 
 var curves = [0];
+var curveLineWidth = [lineWidth];
 var curve = 0; // current curve
 var drawing = false;
 
@@ -104,20 +105,18 @@ function draw(event) {
 }
 
 function onMouseDown(event){
-
-	/*numIndices[numPolygons]++;
-	index++;*/
-	
 	drawing = true;
 	
 	curves[curves.length-1]++;
+	curveLineWidth[curves.length-1] = lineWidth;
+	
 	draw(event);
 } 
 
 function onMouseUp(event) {
 	drawing = false;
-	//console.log("curves: ", curves);
 	curves.push(0);
+	curveLineWidth.push(lineWidth);
 	render();
 }
 
@@ -133,13 +132,8 @@ function onMouseMove(event) {
 function render() {
 	gl.clear( gl.COLOR_BUFFER_BIT );
 
-	/*for(var i=0; i<numPolygons; i++) {
-		gl.drawArrays( gl.TRIANGLE_FAN, start[i], numIndices[i] );
-	}*/
-	
 	for(var i=0, start=0; i<curves.length; i++) {
-		//console.log("start: ", start, curves[i]);
-		gl.lineWidth(lineWidth);
+		gl.lineWidth(curveLineWidth[i]);
 		gl.drawArrays( gl.LINE_STRIP, start, curves[i] );
 		start += curves[i];
 	}
