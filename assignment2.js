@@ -78,10 +78,14 @@ function onLineWidthChange(event) {
 }
 
 function draw(event) {
-	var pos = vec2(2*event.clientX/canvas.width-1,
-					2*(canvas.height-event.clientY)/canvas.height-1);
+	var rect = canvas.getBoundingClientRect();
+	var clientX = event.clientX-rect.left,
+		clientY = event.clientY-rect.top;
+	var pos = vec2(2*clientX/canvas.width-1,
+					2*(canvas.height-clientY)/canvas.height-1);
 	gl.bindBuffer( gl.ARRAY_BUFFER, bufferId );
 	gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(pos));
+	console.log(event.clientX, event.clientY);
 	
 	var color = vec4(colors[cindex]);
 

@@ -29,13 +29,8 @@
 
 	<body>
 		<div>
-			<canvas id="gl-canvas" width="512" height="512">
-				Oops ... your browser doesn't support the HTML5 canvas element
-			</canvas>
-		</div>
-		<div>
 			<label for="mymenu">Color:</label>
-			<select id = "mymenu" size = "7">
+			<select id = "mymenu" size = "1">
 				<option value = "0">Black</option>
 				<option value = "1">Red</option>
 				<option value = "2">Yellow</option>
@@ -44,9 +39,14 @@
 				<option value = "5">Magenta</option>
 				<option value = "6">Cyan</option>
 			</select>
-			<br>
 			<label for="line-width">Line width:</label>
 			<input id="line-width" type="number" step="1" min="1" value="1">
+		</div>
+		<div>
+			<canvas id="gl-canvas" width="512" height="512">
+				Oops ... your browser doesn't support the HTML5 canvas element
+			</canvas>
+			<p><small>(Tested in Chrome browser.)</small></p>
 		</div>
 	</body>
 </html>
