@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    precision mediump float; 
+    attribute vec4 vPosition; 
+    uniform float theta; 
+    
+    void main() { 
+      float d = sqrt(vPosition[0]*vPosition[0] + vPosition[1]*vPosition[1]); 
+      float th = theta*3.14/180.0; 
+      
+      gl_Position = vec4(vPosition[0]*cos(d*th) - vPosition[1]*sin(d*th),
+                        vPosition[0]*sin(d*th) + vPosition[1]*cos(d*th), vPosition[2] , vPosition[3]); 
+    }
+  </script>
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float; 
+    void main() { 
+      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); 
+    }
+  </script>
+  <script src="common/webgl-utils.js"></script>
+  <script src="common/initShaders.js"></script>
+  <script src="common/MV.js"></script>
+  <script src="assignment1.js"></script>
+</head>
+
+<body>
+  <label for="nsubdivs">Number of subdivisions</label>
+  <input id="nsubdivs" type="number" min="0" step="1" value="5" onchange="showTriangle()">
+  <br>
+  <label for="rotangle">Rotation angle (degrees)</label>
+  <input id="rotangle" type="number" value="60" onchange="showTriangle()">
+  <br>
+
+  <canvas id="gl-canvas" width="350" height="350">Browser does not support canvas</canvas>
+</body>
+
+</html>
