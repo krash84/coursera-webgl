@@ -17,14 +17,15 @@ var colors = [
     vec4( 1.0, 0.0, 1.0, 1.0 ),  // magenta
     vec4( 0.0, 1.0, 1.0, 1.0)   // cyan
 ];
-var t;
-var numPolygons = 0;
-var numIndices = [];
-numIndices[0] = 0;
-var start = [0];
+
 var bufferId;
 var cBufferId;
 var lineWidth=1;
+var curves = [0];
+var curveLineWidth = [lineWidth];
+var curve = 0; // current curve
+var drawing = false;
+
 
 window.onload = init;
 
@@ -39,9 +40,6 @@ function init() {
 	m.addEventListener("click", function() {
 		cindex = m.selectedIndex;
 	});
-
-	var a = document.getElementById("Button1")
-	a.addEventListener("click", onButton1Click);
 
 	canvas.addEventListener("mousedown", onMouseDown);
 	canvas.addEventListener("mouseup", onMouseUp);
@@ -78,18 +76,6 @@ function init() {
 function onLineWidthChange(event) {
 	lineWidth = event.srcElement.value;
 }
-
-function onButton1Click(){
-	numPolygons++;
-	numIndices[numPolygons] = 0;
-	start[numPolygons] = index;
-	render();
-}
-
-var curves = [0];
-var curveLineWidth = [lineWidth];
-var curve = 0; // current curve
-var drawing = false;
 
 function draw(event) {
 	var pos = vec2(2*event.clientX/canvas.width-1,
